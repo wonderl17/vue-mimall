@@ -7,7 +7,7 @@
 
 <script>
 import HelloWorld from './components/HelloWorld.vue'
-// import axios from 'axios'
+import axios from 'axios'
 import jsonp from 'jsonp'
 export default {
   name: 'App',
@@ -17,14 +17,19 @@ export default {
   data(){
     return{
       age: 30,
-      data: ''
+      data1: '',
+      data2: ''
     }
   },
   mounted(){
-    let url = "/common/adver-getadver"
+    let url = "/api/common/adver-getadver"
     jsonp(url,(err,res)=>{
         let result = res;
-        this.data = result;
+        this.data1 = result;
+    })
+    axios(url).then((res)=>{
+        let result = res;
+        this.data2 = result;
     })
   }
 }
