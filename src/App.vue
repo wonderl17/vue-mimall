@@ -9,7 +9,7 @@
 // import HelloWorld from './components/HelloWorld.vue'
 // import axios from 'axios'
 // import jsonp from 'jsonp'
-import storage from './storage'
+// import storage from './storage'
 export default {
   name: 'App',
   components: {
@@ -26,7 +26,16 @@ export default {
       // storage.setItem('a',1)
       // storage.setItem('user',{'a':1})
       // storage.clear('a')
-      storage.clear('a','user')
+      // storage.clear('a','user')
+
+    //   let url = "/api/common/adver-getadver"
+    // jsonp(url,(err,res)=>{
+    //     let result = res;
+    //     this.data1 = result;
+    // })
+    // axios(url).then((res)=>{
+    //     let result = res;
+    //     this.data2 = result;
   }
 }
 </script>
