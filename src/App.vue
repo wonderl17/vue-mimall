@@ -19,7 +19,8 @@ export default {
     return{
       age: 30,
       data1: '',
-      data2: ''
+      data2: '',
+      res:{}
     }
   },
   mounted(){
@@ -36,6 +37,9 @@ export default {
     // axios(url).then((res)=>{
     //     let result = res;
     //     this.data2 = result;
+    this.axios.get('/mock/user/login.json').then((res)=>{
+        this.res =res;
+    })
   }
 }
 </script>
