@@ -37,8 +37,10 @@ export default {
     // axios(url).then((res)=>{
     //     let result = res;
     //     this.data2 = result;
-    this.axios.get('/mock/user/login.json').then((res)=>{
+    this.axios.get('/user/login').then((res)=>{
         this.res =res;
+        console.log(this.res);
+        
     })
   }
 }

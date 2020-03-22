@@ -5,7 +5,7 @@ module.exports = {
         proxy: {
             '/api': {
                 target: 'https://www.imooc.com',
-                changeOrign0: true,
+                changeOrign: true,
                 pathRewrite: {
                     '^/api':'/'
                 }
