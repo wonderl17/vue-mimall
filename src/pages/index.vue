@@ -10,7 +10,7 @@
                                 <ul v-for="(item,index1) in menu.menuList" :key="index1">
                                     <li v-for="(sub,index2) in item" :key="index2" >
                                         <a :href="sub?'/#/product/'+ sub.id:''">
-                                            <img :src="sub?sub.img:'/imgs/item-box-1.png'" alt="">
+                                            <img v-lazy="sub?sub.img:'/imgs/item-box-1.png'" alt="">
                                             {{sub?sub.name:'小米9'}}
                                         </a>
                                     </li>
@@ -22,7 +22,7 @@
                 </div>
                 <swiper :options="swiperOption">
                     <swiperSlide class="swiper-no-swiping" v-for="(item,index) in slideList" :key="index"> 
-                        <a :href="'/#/product/'+item.id"><img :src="item.img"></a>
+                        <a :href="'/#/product/'+item.id"><img v-lazy="item.img"></a>
                     </swiperSlide>
                     <div class="swiper-pagination" slot="pagination"></div>
                     <div class="swiper-button-prev" slot="button-prev"></div>
@@ -32,12 +32,12 @@
             </div>
             <div class="ads-box">
                 <a :href="'/#/product/'+item.id" v-for="(item,index) in adsList" :key="index">
-                    <img :src="item.img" alt="">
+                    <img v-lazy="item.img" alt="">
                 </a>
             </div>
             <div class="banner">
                 <a href="/#/product/30">
-                    <img src="/imgs/banner-1.png" alt="">
+                    <img v:lazy="/imgs/banner-1.png" alt="">
                 </a>
             </div>
             
@@ -58,7 +58,7 @@
                                 <span v-show="j%2==1" class="kill-pro">秒杀</span>
 
                                 <div class="item-img">
-                                    <img :src="item.mainImage">
+                                    <img v-lazy="item.mainImage">
                                     <!-- <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/0099822e42b4428cb25c4cdebc6ca53d.jpg?thumb=1&w=250&h=250&f=webp&q=90" alt=""> -->
                                 </div>
                                 <div class="item-info">

@@ -10,11 +10,11 @@
           </div>
           <div class="topbar-user">
             <a href="javascript:;" v-if="username">{{username}}</a>
-            <a href="javascript:;" v-if="!username" @click="login">登陆</a>
+            <a href="javascript:;" v-if="!username" @click="login">登录</a>
 
             <a href="javascript:;" v-if="username">我的订单</a> 
             <a href="javascript:;" class="my-cart" @click="goToCart"><span class="icon-cart">
-              </span>购物车</a>
+              </span>购物车{{cartCount>=0?('('+cartCount+')'):''}}</a>
           </div>  
         </div>
     </div>
@@ -31,7 +31,7 @@
                 <li class="product" v-for="(item,index) in phoneList" :key="index">
                   <a :href="'/#/product/'+ item.id" target="_blank">
                     <div class="pro-img">
-                      <img :src="item.mainImage" :alt="item.subtitle">
+                      <img v-lazy="item.mainImage" :alt="item.subtitle">
                     </div>
                     <div class="pro-name">{{item.name}}</div>
                     <div class="pro-price">{{item.price |currency}}</div>
@@ -120,13 +120,22 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
     name:'nav-header',
     data(){
       return{
-        username: '',
         phoneList:[]
       } 
+    },
+    computed:{
+      // username(){
+      //   return this.$store.state.username
+      // },
+      // cartCount(){
+      //   return this.$store.state.cartCount
+      // }
+      ...mapState(['cartCount','username'])
     },
     filters:{
       currency(val){
@@ -184,6 +193,7 @@ export default {
           margin-right: 17px;
         }
         .my-cart{
+          margin-right: 0;
           width: 110px;
           background: #FF6600;
           text-align: center;
