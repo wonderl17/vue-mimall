@@ -40,10 +40,10 @@
              更能AI 精准分析视频内容，15个场景智能匹配背景音效。
           </p>
           <div class="video-bg" @click="clickVideo"></div>
-          <transition name='video-slide'>
-            <div class="video-box" v-show="videoShow">
-              <div class="overlay"></div>
-                <div class="video">
+          <!-- <transition name='video-slide'> -->
+            <div class="video-box">
+              <div class="overlay" v-if="videoShow" @click="closeVideo"></div>
+                <div class="video" :class="{'slide':videoShow}">
                   <span class="icon-close" @click="closeVideo"></span>
                   <video src="/imgs/product/video.mp4" 
                     controls="controls"
@@ -52,7 +52,7 @@
                   </video>
               </div>
             </div>
-          </transition>
+          <!-- </transition> -->
         </div>
 
       </div>
@@ -81,12 +81,9 @@ export default {
         },
         clickVideo(){
           this.videoShow = true;
-          let p = this;
-          console.log(p);
-          
           setTimeout(()=>{
              this.$refs.video.play();
-          },700)
+          },500)
         }
     },
     data() {
@@ -198,6 +195,7 @@ export default {
             margin-bottom: 58px;
           }
           .video-bg{
+            position: relative;
             background: url('/imgs/product/gallery-1.png') no-repeat center;
             background-size: cover;
             margin: 0 auto;
@@ -206,15 +204,17 @@ export default {
             cursor: pointer;
           }
           .video-box{
-            @include position(fixed);
-            transition: top .5s;
-            z-index: 12;
-            &.video-slide-enter,&.video-slide-leave-to{
-                top: -100%;
-            }
-            &.video-slide-enter-to{
-                top: 0;
-            }
+          
+            // transition: top .5s;
+            // z-index: 12;
+            // &.video-slide-enter,&.video-slide-leave-to{
+            //     top: -100%;
+            //     opacity: 0;
+            // }
+            // &.video-slide-enter-to{
+            //     top: 0;
+            //     opacity: 1;
+            // }
             .overlay{
               // position: fixed;
               // top: 0;
@@ -227,17 +227,19 @@ export default {
               opacity: .4;
             }
             .video{
-              position: absolute;
-              top: 50%;
+              position: fixed;
+              top: -150%;
               left: 50%;
               width: 1000px;
               height: 536px;
               transform: translate(-50%,-50%);
+              box-shadow: 1px 1px 11px #cccccc;
+              
               .icon-close{
                 display: inline-block;
                 @include positionImg(absolute,23px,25px,20px,20px,'/imgs/icon-close.png');
-                z-index: 10;
                 cursor: pointer;
+                z-index: 10;
                 &:hover{
                     transform: scale(1.1);
                 }
@@ -247,6 +249,7 @@ export default {
                 height: 100%;
                 outline: none;
                 object-fit:cover;
+                
               }
             }
             
