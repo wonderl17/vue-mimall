@@ -1,14 +1,14 @@
 <template>
   <div class="product">
-      <ProductParam>
+      <ProductParam :product='product'>
         <template v-slot:buy>
-          <button class="btn">立即购买</button>
+          <button class="btn" @click="buy">立即购买</button>
         </template>
       </ProductParam>
       <div class="content">
         <div class="item-bg1">
-          <h2>小米CC9</h2>
-          <h3>3200万自拍，4800万三摄</h3>
+          <h2>{{product.name}}</h2>
+          <h3>{{product.subtitle}}</h3>
           <p>
             <a href="javascript:;">全球首款双频 GP</a><span>|</span>
             <a href="javascript:;">骁龙845</a><span>|</span>
@@ -16,7 +16,7 @@
             <a href="javascript:;">红外人脸识别</a>
           </p>
           <div class="price">
-            <span>￥<em>1799</em></span>
+            <span>￥<em>{{product.price}}</em></span>
           </div>
         </div>
         <div class="item-bg2"></div>
@@ -41,8 +41,8 @@
           </p>
           <div class="video-bg" @click="clickVideo"></div>
           <!-- <transition name='video-slide'> -->
-            <div class="video-box">
-              <div class="overlay" v-if="slideShow == 'slideDown'" @click="closeVideo"></div>
+            <div class="video-box" v-show="slideShow">
+              <div class="overlay"  @click="closeVideo"></div>
                 <div class="video" :class="slideShow">
                   <span class="icon-close" @click="closeVideo"></span>
                   <video src="/imgs/product/video.mp4" 
@@ -74,20 +74,41 @@ export default {
       swiper,
       swiperSlide
     },
+    mounted(){
+      this.getProductInfo();
+    },
     methods:{
         closeVideo(){
           this.slideShow = 'slideUp';
           this.$refs.video.pause();
+          setTimeout(()=>{
+            this.slideShow = '';          
+            },500)
         },
         clickVideo(){
           this.slideShow = 'slideDown';
           setTimeout(()=>{
              this.$refs.video.play();
           },500)
+        },
+        getProductInfo(){
+          let id = this.$route.params.id;
+          this.axios.get(`/products/${id}`).then((res)=>{
+              this.product = res;
+              console.log(this.product);
+              
+          })
+          
+        },
+        buy(){
+          let id = this.$route.params.id;
+          // this.$router.push('/detail/'+id);
+          this.$router.push(`/detail/${id}`)
         }
     },
     data() {
       return {
+        product:{},//商品信息
         slideList:[
           {
             imgurl:('/imgs/product/gallery-2.png')
@@ -115,7 +136,7 @@ export default {
           }
         },
         // videoShow: ''
-        slideShow:''
+        slideShow:''//控制动画效果
       }
     }
 }

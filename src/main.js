@@ -31,8 +31,14 @@ axios.interceptors.response.use(function (response) {
   if (res.status == 0) {
     return res.data;
   } else if (res.status == 10) {
-    if(path!='#/index')
+    if (path != '#/index' && /^(#\/product\/)/.test(path)==false) {
+      console.log(path);
+      console.log(/^#\/product\//.test(path));
+      
       window.location.href = '/#/login';
+    }
+    return Promise.reject(res.msg);
+
   } else {
     alert(res.msg);
     return Promise.reject(res.msg);  

@@ -2,7 +2,7 @@
   <div class="nav-bar" :class="{'is-fixed':isFixed}">
       <div class="container">
           <div class="pro-title">
-                小米CC9
+            {{product.name}}
           </div>
           <div class="pro-param">
               <a href="">概述</a><span>|</span>
@@ -35,7 +35,8 @@ export default {
     destroyed(){
         window.removeEventListener('scroll',this.initHeight)
 
-    }
+    },
+    props:['product']
 }
 </script>
 

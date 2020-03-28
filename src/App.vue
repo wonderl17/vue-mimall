@@ -48,12 +48,12 @@ export default {
 
   },
   updated(){
-    this.getCartCount();
+    // this.getCartCount();
 
   },
   methods:{
     getUser(){
-      this.axios.get('/user').then((res)=>{
+      this.axios.get('/user').then((res={})=>{
         //to do 保存到 vuex里
         this.$store.dispatch('saveUserName',res.username);
 
