@@ -42,8 +42,8 @@
           <div class="video-bg" @click="clickVideo"></div>
           <!-- <transition name='video-slide'> -->
             <div class="video-box">
-              <div class="overlay" v-if="videoShow" @click="closeVideo"></div>
-                <div class="video" :class="{'slide':videoShow}">
+              <div class="overlay" v-if="slideShow == 'slideDown'" @click="closeVideo"></div>
+                <div class="video" :class="slideShow">
                   <span class="icon-close" @click="closeVideo"></span>
                   <video src="/imgs/product/video.mp4" 
                     controls="controls"
@@ -76,11 +76,11 @@ export default {
     },
     methods:{
         closeVideo(){
-          this.videoShow = false;
+          this.slideShow = 'slideUp';
           this.$refs.video.pause();
         },
         clickVideo(){
-          this.videoShow = true;
+          this.slideShow = 'slideDown';
           setTimeout(()=>{
              this.$refs.video.play();
           },500)
@@ -114,7 +114,8 @@ export default {
             clickable: true
           }
         },
-        videoShow: false
+        // videoShow: ''
+        slideShow:''
       }
     }
 }
@@ -204,37 +205,49 @@ export default {
             cursor: pointer;
           }
           .video-box{
-          
-            // transition: top .5s;
-            // z-index: 12;
-            // &.video-slide-enter,&.video-slide-leave-to{
-            //     top: -100%;
-            //     opacity: 0;
-            // }
-            // &.video-slide-enter-to{
-            //     top: 0;
-            //     opacity: 1;
-            // }
             .overlay{
-              // position: fixed;
-              // top: 0;
-              // left: 0;
-              // width: 100%;
-              // height: 100%;
               @include position(fixed);
-
               background-color: #333333;
               opacity: .4;
             }
+            @keyframes slideDown{
+              from{
+                top: -50%;
+                opacity: 0;
+              }
+              to{
+                top: 50%;
+                opacity: 1;
+              }
+            }
+            @keyframes slideUp {
+              from{
+                top: 50%;
+                opacity: 1;
+              }
+              to{
+                top: -50%;
+                opacity: 0;
+              }
+            }
             .video{
               position: fixed;
-              top: -150%;
+              top: -50%;
               left: 50%;
               width: 1000px;
               height: 536px;
               transform: translate(-50%,-50%);
               box-shadow: 1px 1px 11px #cccccc;
-              
+              &.slideDown{
+                animation: slideDown .6s linear;
+                top:50%;
+                opacity: 1;
+              }
+              &.slideUp{
+                animation: slideUp .6s linear;
+                top:-50%;
+                opacity: 0;
+              }
               .icon-close{
                 display: inline-block;
                 @include positionImg(absolute,23px,25px,20px,20px,'/imgs/icon-close.png');
