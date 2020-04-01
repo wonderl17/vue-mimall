@@ -1,6 +1,11 @@
 <template>
-  <div>
-      orderconfirm
+  <div class="order-confirm">
+    <div class="wrapper">
+      <div class="container">
+        <div class="order-box"></div>
+        
+      </div>
+    </div>
   </div>
 </template>
 

@@ -22,7 +22,9 @@
                 </div>
                 <swiper :options="swiperOption">
                     <swiperSlide class="swiper-no-swiping" v-for="(item,index) in slideList" :key="index"> 
-                        <a :href="'/#/product/'+item.id"><img v-lazy="item.img"></a>
+                        <a :href="'/#/product/'+item.id">
+                        <img :src="item.img" v-if="index==0||index==(slideList.length-1)">
+                        <img v-lazy="item.img" v-else> </a>
                     </swiperSlide>
                     <div class="swiper-pagination" slot="pagination"></div>
                     <div class="swiper-button-prev" slot="button-prev"></div>
@@ -131,7 +133,7 @@ export default {
                     el:'.swiper-pagination',
                     clickable: true,
                 },
-                preventInteractionOnTransition : true, //防止拖动
+                // preventInteractionOnTransition : true, //防止拖动
                 navigation: {
                     nextEl: '.swiper-button-next',
                     prevEl: '.swiper-button-prev',
@@ -427,6 +429,9 @@ export default {
         },
         goToLogin(){
             this.$router.push('/login');
+        },
+        swiperInit(){
+
         }
     }
 }

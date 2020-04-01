@@ -9,12 +9,14 @@
             <a href="javascript:;">协议规则</a>
           </div>
           <div class="topbar-user">
-            <a href="javascript:;" v-if="username">{{username}}</a>
+            <a href="javascript:;" v-if="username" >{{username}}</a>
+            <a href="javascript:;" v-if="username" @click="quit">退出</a>
+
             <a href="javascript:;" v-if="!username" @click="login">登录</a>
 
             <a href="javascript:;" v-if="username">我的订单</a> 
-            <a href="javascript:;" class="my-cart" @click="goToCart"><span class="icon-cart">
-              </span>购物车{{cartCount>=0?('('+cartCount+')'):''}}</a>
+            <a href="javascript:;" class="my-cart" @click="goToCart">
+              <span class="icon-cart"></span>购物车{{cartCount>=0?('('+cartCount+')'):''}}</a>
           </div>  
         </div>
     </div>
@@ -145,10 +147,20 @@ export default {
     },
     mounted(){
       this.getProductList();
+      let params = this.$route.params
+      if(params && params.from === 'login'){
+        this.getCartCount();
+      }
     },
     methods:{
       login(){
         this.$router.push('/login')
+      },
+      getCartCount(){
+        this.axios.get('/carts/products/sum').then((res)=>{
+            this.$store.dispatch('saveCartCount',res)
+          }
+        )
       },
       getProductList(){
         this.axios.get('/products',{
@@ -166,6 +178,21 @@ export default {
       },
       goToCart(){
         this.$router.push('/cart')
+      },
+      quit(){ 
+        this.axios.post('/user/logout').then(()=>{
+          this.$message.success('退出成功');
+          // this.$router.push('/login')
+          // this.$cookie.set('userId','',{expires:'-1'})
+          this.$cookie.delete('userId')
+          console.log(this.$cookie);
+          
+          this.$store.dispatch('saveUserName','');
+          this.$store.dispatch('saveCartCount',-1);
+          
+        }).catch(()=>{
+           this.$message.error('failed')
+        })
       }
     }
 }
@@ -186,11 +213,41 @@ export default {
         margin-right: auto;
         margin-left: auto;
         @include flex();
-
+        
         a{
           display: inline-block;
           color:#B0B0B0;
           margin-right: 17px;
+        }
+        .topbar-user{
+            .username{
+            position: relative;
+
+              &:hover{
+                .loginOp{
+                  //  border-top: 1px solid #e5e5e5;
+                   display: block;
+                }
+              }
+              .loginOp{
+              position: absolute;
+              background-color: #333333;
+              width: 40px;
+              text-align: center;
+              height: 25px;
+              line-height: 25px;
+              top:38px;
+              left: -8px;
+              z-index: 10;
+              display: none;
+              cursor: pointer;
+              &:hover{
+                background-color: $colorA;
+                color: #fff;
+              }
+            }
+            }
+            
         }
         .my-cart{
           margin-right: 0;
@@ -216,42 +273,7 @@ export default {
         height: 112px;
         @include flex();
         position: relative;
-        .header-logo{
-          display: inline-block;
-          width: 55px;
-          height: 55px;
-          background-color: #FF6600;
-
-          a{
-            display: inline-block;
-            width: 110px;
-            height: 55px;
-            &:before{
-              content: '';
-              @include bgImg(55px,55px,'/imgs/mi-logo.png');
-              // display: inline-block;
-              // width: 55px;
-              // height: 55px;
-              // background: url('/imgs/mi-logo.png') no-repeat center;
-              // background-size: contain;
-              transition: margin .2s;
-            }
-            &:after{
-              content: '';
-             @include bgImg(55px,55px,'/imgs/mi-home.png');
-
-              // display: inline-block;
-              // width: 55px;
-              // height: 55px;
-              // background: url('/imgs/mi-home.png') no-repeat center;
-              // background-size: contain;
-            }
-            &:hover:before{
-              margin-left: -55px;
-              transition: margin .2s;
-            }
-          }
-        }
+        
         .header-menu{
            display: inline-block;
            width: 643px;

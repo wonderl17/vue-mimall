@@ -69,16 +69,28 @@ export default {
                 //to do 保存用户名
                 // this.$store.dispatch('saveUserName',res.username);
                 this.saveUserName(res.username);
-                this.$router.push('/index');
+                this.$message.success('登录成功');
+                // this.$router.push({          //query传参
+                //     path: '/index',
+                //     query:{                  
+                //         from:'login'
+                //     }
+                // });
+                this.$router.push({         //params传参
+                    name: 'index',
+                    params:{
+                        from:'login'
+                    }
+                })              
             })
         },
         ...mapActions(['saveUserName']),
-
+    
         register(){
             this.axios.post('/user/register',{
-                username:'abc111',
-                password:'1',
-                email:'1@163.com'
+                username:'wonderl',
+                password:'wonderl',
+                email:'wonderl@163.com'
             }).then((res)=>{
                 console.log(res);
                 alert('注册成功')
