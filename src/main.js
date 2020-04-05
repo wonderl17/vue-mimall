@@ -43,6 +43,10 @@ axios.interceptors.response.use(function (response) {
     Message.warning(res.msg)
     return Promise.reject(res.msg);  
   }
+}, (error) => {
+    let res = error.response
+    Message.error(res.data.message)
+    return Promise.reject(error); 
 })
 
 Vue.use(VueAxios, axios);
@@ -52,10 +56,44 @@ Vue.use(VueLazyLoad, {
 
 Vue.use(VueCookie)
 
+
+
+
+const showMessage = Symbol('showMessage')
+class DonMessage {
+  success (options, single = true) {
+    this[showMessage]('success', options, single)
+  }
+  warning (options, single = true) {
+    this[showMessage]('warning', options, single)
+  }
+  info (options, single = true) {
+    this[showMessage]('info', options, single)
+  }
+  error (options, single = true) {
+    this[showMessage]('error', options, single)
+  }
+
+  [showMessage] (type, options, single) {
+    if (single) {
+      // 判断是否已存在Message
+      if (document.getElementsByClassName('el-message').length === 0) {
+        Message[type](options)
+      }
+    } else {
+      Message[type](options)
+    }
+  }
+}
+Vue.prototype.$message = new DonMessage()
 // Vue.use(Message)
-Vue.prototype.$message = Message;
+// Vue.prototype.$message = Message;
 Vue.config.productionTip = false
 
+router.afterEach(() => {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+})
 
 
 new Vue({

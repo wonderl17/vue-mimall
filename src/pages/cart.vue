@@ -135,7 +135,7 @@ export default {
         selectedAll(allChecked){
 
             if(this.list.length>0){
-                console.log(this.list);
+                // console.log(this.list);
                 
             if(!allChecked)
                 this.axios.put('/carts/selectAll' 
@@ -159,7 +159,7 @@ export default {
                 this.$message.info('请至少选择一件商品')
                 return;
             }else{
-                this.$message.success('提交成功')
+                // this.$message.success('提交成功')
                 this.$router.push('/order/confirm')
             }
         }
