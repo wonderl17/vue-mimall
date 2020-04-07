@@ -109,6 +109,18 @@
         //     el = el.nextSibling;
         // }
         console.log(foo.childNodes);
+
+        var x = 1;
+        function fn (){
+            x = 2;
+            console.log(x);
+            
+           console.log(this.x);
+            
+        }
+        fn();
+        console.log(x);
+        
         
 </script>
 </body>

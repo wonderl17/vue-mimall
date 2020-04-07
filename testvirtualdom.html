@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="virtual-dom">
+        <p>Virtual DOM</p>
+        <ul id="list">
+          <li class="item">Item 1</li>
+          <li class="item">Item 2</li>
+          <li class="item">Item 3</li>
+        </ul>
+        <div>Hello World</div>
+    </div> 
+<!--         
+        作者：我是你的超级英雄
+        链接：https://juejin.im/post/5d36cc575188257aea108a74
+        来源：掘金
+        著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。 -->
+        <script>
+          //创建节点对象
+          function Element(tagName,props,children){
+              this.tagName = tagName;
+              this.props = props;
+              this.children = children;
+            
+              if(props.key){
+                  this.key = props.key;
+              }
+              var count = 0;
+              children.forEach((child,i)=>{
+                  if(child instanceof Element){
+                      count++;
+                  }else{
+                      children[i] = child + ''
+                  }
+              })
+              this.count = count;
+          }
+
+          Element.prototype.render = function(){
+            var el =document.createElement(this.tagName);
+            var props = this.props;
+            for (propName in props){
+                el.setAttribute(propName,props[propName])
+            }
+            var children = this.children||[]
+            children.forEach((child)=>{
+                var childNode = (child instanceof Element)
+                    ?child.render()
+                    :document.createTextNode(child);
+                el.appendChild(childNode);
+            })
+            return el;
+          }
+
+
+
+          var el = function createElement(tagName,props,children){
+              return new Element(tagName,props,children);
+          }
+          var ul = el('div',{id:'virtual-dom'},[
+              el('p',{},['Virtual Dom']),
+              el('ul',{id: 'list'},[
+                  el('li',{class:'item'},['Item 1']),
+                  el('li',{class:'item'},['Item 2']),
+                  el('li',{class:'item'},['Item 3'])
+              ]),
+              el('div',{},['Hello World'])
+          ])
+            
+
+            console.log(ul);
+            var $ul=ul.render();
+            document.body.appendChild($ul);
+            console.log($ul);
+            
+        </script>
+</body>
+</html>
