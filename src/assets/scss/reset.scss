@@ -1,0 +1,34 @@
+body,div,p,h1,h2,h3,h4,h5,h6,ul,li,dl,dt,a,input,button,textarea,select{
+  margin: 0;
+  padding: 0;
+  outline: none;
+}
+html,body{
+  font-family:Helvetica Neue,Helvetica,Arial,Microsoft Yahei,Hiragino Sans GB,Heiti SC,WenQuanYi Micro Hei,sans-serif;
+  color: #333333;
+  background-color: #ffffff;
+  min-width: 1226px;
+  font-size: 12px;
+}
+a{
+  text-decoration: none;
+}
+ul,li{
+  list-style: none;
+}
+input{
+  font: normal;
+}
+input:focus,a:focus{
+  outline: none;
+}
+
+// .clearfix_after{zoom:1;}
+// .clearfix:after {  
+//     content: ".";     //<----内容为“.”就是一个英文的句号而已。也可以不写。
+//     display: block;   //<----加入的这个元素转换为块级元素。
+//     clear: both;     //<----清除左右两边浮动。
+//     visibility: hidden;      //<----可见度设为隐藏。注意它和display:none;是有区别的。仍然占据空间，只是看不到而已；
+//     height: 0;     //<----高度为0；
+//     font-size:0;    //<----字体大小为0；
+// }

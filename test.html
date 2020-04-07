@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #container {
+            padding-left: 200px;
+            padding-right: 150px;
+            height: 500px;
+        }
+
+        #container .column {
+            float: left;
+        }
+
+        #center {
+            width: 100%;
+            background-color: red;
+
+            height: 500px;
+
+        }
+
+        #left {
+            width: 200px;
+            margin-left: -100%;
+            position: relative;
+            right: 200px;
+            background-color: blue;
+            height: 500px;
+
+        }
+
+        #right {
+            width: 150px;
+            margin-right: -150px;
+            background-color: pink;
+            height: 500px;
+
+        }
+
+        /* 
+作者：o逍遥生o
+链接：https://juejin.im/post/5e7c561b6fb9a0094f045033
+来源：掘金
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。 */
+    </style>
+
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <div id="center" class="column"></div>
+        <div id="left" class="column"></div>
+        <div id="right" class="column"></div>
+    </div>
+    <!--       sc
+      作者：o逍遥生o
+      链接：https://juejin.im/post/5e7c561b6fb9a0094f045033
+      来源：掘金
+      著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。 -->
+    <script>
+       
+
+        // 常考点
+        // function show(a,b) {
+        //     console.log('this:', this); // this是window
+        //     console.log(a);
+        //     console.log(b);
+            
+        // }
+        // var obj = {
+        //     show: function () {
+        //         // console.log(this);
+        //         show('a','b')
+        //         // show.apply(this,['a','b']); // 函数被直接调用了
+        //     },
+        //     showa: function(){
+        //         console.log(this);
+                
+        //     }
+        // };
+        // var fn = obj.show;
+        // fn();
+        // obj.showa()
+        // var a=Math.asin(10>>4/3)
+        // console.log(a);
+        // GET/ HTTP /1.1
+        // var a = obj.show;
+        // a.call(obj);
+        // function Person(name,age){
+        //     this.name = name;
+        //     this.age = age;
+        //     console.log(this);
+            
+        // }
+        // console.log(Person.prototype);
+        
+        // var t = {}
+        // if(t)
+        // console.log(t);
+        
+
+        // var p1  = new Person('w',12);
+        // console.log(p1.__proto__);
+        // var obj1 = {
+        //     a:'ab',
+        //     b: 1,
+        //     arr :[1,2,3],
+        //     obj : {
+        //         a : 'a',
+        //         b : 1
+        //     }
+        // }
+        // //赋值操作
+        // var obj2 = obj1 ;
+        // obj1.a = 'ac'
+        // // console.log(obj2.a);
+
+        //实现一个浅拷贝
+        // var obj3 = {...obj1};
+        // var obj4 = Object.assign({},obj1)
+
+        // obj1.a = 'ac'
+        // obj1.arr[1] = 111
+        // obj1.obj.a = 'aaaa';
+
+        // console.log(obj1,obj3);
+        // console.log('obj1:',obj1,'obj4:',obj4);
+        // console.log(typeof obj1);
+        
+        // //实现一个深拷贝
+      
+        // function deepCopy(obj){
+        //     if(typeof obj !== 'object'){
+        //         return obj;
+        //     }else{
+        //         let newThing = obj.constructor === Array? []:{};
+        //         Object.keys(obj).forEach((val)=>{
+        //             newThing[val] = deepCopy(obj[val]); 
+        //         })
+        //         return newThing;
+        //     }
+        // }
+
+
+        // var obj5 = deepCopy(obj1);
+        // // console.log(obj1.__proto__);
+        // var a = deepCopy(123)
+        // console.log(' a =',a);
+        
+        // obj1.a = 'ac'
+        // obj1.arr = [1,2,3,4,5]
+        // obj1.obj.a = 'aaaa';
+        // console.log('obj1:',obj1,'obj5:',obj5);
+        //排序算法
+        var a = [1,2,4,6,5,7,8,1]
+        // function babelsort(arr){
+        //     for(var i=0;i<arr.length;i++){
+        //        for(var j = 0;j<arr.length-i;j++){
+        //             if(arr[j]>arr[j+1]){
+        //                 var t = arr[j];
+        //                 arr[j] = arr[j+1];
+        //                 arr[j+1] = t;
+        //             }
+        //        }
+        //     }
+        //     return arr;
+        // }
+        // console.log(babelsort(a));
+        // function partition(arr,low,high){
+        //     let pivot = arr[low];
+        //     while(low<high){
+        //         while(low<high && arr[high]>=pivot){
+        //             high--;
+        //         }
+        //         while(low<high && arr[low]<=pivot){
+        //             low++;
+        //         }
+        //         if(low >= high)
+        //             break;
+        //         else{
+        //             var temp = arr[high];
+        //             arr[high] = arr[low];
+        //             arr[low] = temp;
+        //         }
+        //     }
+        //     return low;
+        //  }
+        // function quicksort(arr,low=0,high=arr.length-1){
+        //     let pivot = partition(arr,low,high);
+        //     quicksort(arr,low,pivot);
+        //     quicksort(arr,pivot+1,high);
+        // }
+        // quicksort(a);
+        // console.log(a);
+        
+        
+    </script>
+</body>
+
+</html>

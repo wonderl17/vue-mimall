@@ -1,9 +1,5 @@
  <template>
-  <div class="footer">
-    <div class="footer-logo">
-      <img src="/imgs/logo-footer.png" alt="">
-      <p>小米商城</p>
-    </div>
+  <div class="login-footer">
     <div class="footer-link">
       <a href="https://github.com/wonderl17">github</a><span>|</span>
       <a href="https://www.bilibili.com/">bilibili</a><span>|</span>
@@ -16,28 +12,18 @@
 
 <script>
 export default {
-    name:'nav-footer'
+    name:'login-footer'
 }
 </script>
 
 <style lang="scss">
-    .footer{
-      height: 234px;
-      border-top: 4px solid #FF6600;
-      background-color: #333;
+    .login-footer{
+      height: 100px;
+      background-color: #FFF;
+      margin-top: 60px;
       font-size: 16px;
       color: #999;
       text-align: center;
-      .footer-logo{
-          margin-top: 46px;
-          margin-bottom: 31px;
-          img{
-            width: 53px;
-            height: 36px;
-            margin-bottom: 13px;
-          }
-          
-      }
       .footer-link{
         a{
           color: #999;
@@ -48,10 +34,6 @@ export default {
         }
         margin-bottom: 13px;
       }
-      .copyright{
-        .domain{
-          color: #FF6600;
-        }
-      }
+      
     }
 </style>
